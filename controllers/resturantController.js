@@ -26,4 +26,22 @@ const createResturantController = async ( req,res) =>{
     });
  }
 };
-module.exports = {createResturantController}
+//get all resturant
+const getAllResturant = async (req, res) => {
+  try {
+    const restaurants = await resturantModel.find(); // Fixed model name
+    res.status(200).json({
+      success: true,
+      message: "Fetched all restaurants",
+      data: restaurants,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch restaurants",
+      error: error.message,
+    });
+  }
+};
+
+module.exports = {createResturantController,getAllResturant};
